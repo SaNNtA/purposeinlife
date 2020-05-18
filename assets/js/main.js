@@ -5,7 +5,7 @@ $(document).ready(function () {
     $('.wrapper').addClass('active');
 });
 
-const host = "http://f0439912.xsph.ru/api";
+const host = "f0439912.xsph.ru.xsph.ru/api";
 const f = async (url, method = 'GET', data = null) => {
     let options = {
         method,
