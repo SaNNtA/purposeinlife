@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrow | Purpose in life</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="SHORTCUT ICON" href="assets/images/arrow.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Taviraj:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="wrapper" id="app">
+    <!-- HOME -->
+    <transition>
+        <div v-if="page === 'index'" class="home">
+            <div class="parallax">
+                <ul class="parallax__list">
+                    <li data-depth="0.10">
+                        <div class="parallax__bg"></div>
+                    </li>
+                    <li data-depth="0.15">
+                        <div class="parallax__rope parallax__rope_1">
+                            <div class="parallax__element parallax__element_1"><span></span></div>
+                            <div class="parallax__element parallax__element_2"><span></span></div>
+                            <div class="parallax__element parallax__element_3"><span></span></div>
+                            <img src="assets/images/rope.png" alt="">
+                        </div>
+                    </li>
+                    <li data-depth="0.30">
+                        <div class="parallax__rope parallax__rope_2">
+                            <div class="parallax__element parallax__element_4"><span></span></div>
+                            <div class="parallax__element parallax__element_5"><span></span></div>
+                            <img src="assets/images/rope.png" alt="">
+                        </div>
+                    </li>
+                    <li data-depth="0.60">
+                        <div class="parallax__rope parallax__rope_3">
+                            <div class="parallax__element parallax__element_6"><span></span></div>
+                            <div class="parallax__element parallax__element_7"><span></span></div>
+                            <div class="parallax__element parallax__element_8"><span></span></div>
+                            <img src="assets/images/rope.png" alt="">
+                        </div>
+                    </li>
+                    <li data-depth="0.30">
+                        <div class="parallax__wave parallax__wave_1"></div>
+                    </li>
+                    <li data-depth="0.40">
+                        <div class="parallax__wave parallax__wave_2"></div>
+                    </li>
+                    <li data-depth="0.50">
+                        <div class="parallax__wave parallax__wave_3"></div>
+                    </li>
+                    <li data-depth="0.60">
+                        <div class="parallax__litehouse"></div>
+                    </li>
+                    <li data-depth="0.60">
+                        <div class="parallax__wave parallax__wave_4"></div>
+                    </li>
+                    <li data-depth="0.80">
+                        <div class="parallax__wave parallax__wave_5"></div>
+                    </li>
+                    <li data-depth="1">
+                        <div class="parallax__wave parallax__wave_6"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <div class="home__inner">
+                    <div class="home__title">Share Your Purpose</div>
+                    <div class="home__subtitle">
+                        #ShareYourPurpose a community in which people share their purposes will be supported in
+                        your endeavors in order to become rich, healthy and famous by the end of the year. Well, or at
+                        least
+                        run in
+                        the mornings, get a good salary and do not forget to read good books before going to bed.
+                    </div>
+                </div>
+                <div class="home__button">
+                    <a @click="go('share')" class="button">share your purpose</a>
+                    <a @click="go('view')" class="button">view purposes</a>
+                </div>
+            </div>
+        </div>
+    </transition>
+    <!-- /HOME -->
+
+    <!-- SHARE -->
+    <transition>
+        <div v-if="page === 'share'" class="share">
+            <div class="container__share">
+                <div class="share__inner">
+                    <form class="form">
+                        <h1 class="form__title">Share your purpose</h1>
+                        <div class="form__name__age">
+                            <div class="form__item">
+                                <label for="name">Name*</label>
+                                <input v-model="form.name" type="text" id="name"
+                                       title='Кириллица с пробелами с заглавной буквы' required>
+                            </div>
+                            <div class="form__item">
+                                <label for="age">Age*</label>
+                                <input v-model="form.age" type="number" id="age" min="0" max="100"
+                                       title='Кириллица с пробелами с заглавной буквы' required>
+                            </div>
+                            <div class="form__item">
+                                <label for="email">Email*</label>
+                                <input v-model="form.email" type="email" id="email" required>
+                            </div>
+                        </div>
+                        <label for="title">Title*</label>
+                        <input v-model="form.title" type="text" id="title" required maxlength="24">
+                        <br>
+                        <label for="text">My purpose is...*</label>
+                        <textarea v-model="form.content" id="text" required></textarea>
+                        <input @change="fileSelected" type="file" name="file" id="file" class="inputfile">
+                        <label for="file">Click to upload an image</label>
+                        <br>
+                        <button class="form__btn" @click="sendForm()" type="button">Submit</button>
+                    </form>
+                    <img @click="go('index')" class="share__cross" src="assets/images/cross_1.png" alt="">
+                </div>
+            </div>
+        </div>
+    </transition>
+    <!-- /SHARE -->
+
+    <!-- VIEW -->
+    <transition>
+        <div v-if="page === 'view'" class="view">
+            <div class="info">
+                <h1 class="h1">Last purposes</h1>
+                <img @click="go('index')" class="cross" src="assets/images/cross_1.png" alt="">
+            </div>
+
+            <div class="container__view">
+                <div v-for="letter in letters" class="letter">
+                    <div class="letter__inner" @click="pageLetter(letter)">
+                        <img class="letter__item letter__item_1" src="assets/images/letter/1.png" alt="">
+                        <div class="letter__item_2">
+                            <img class="letter__item" src="assets/images/letter/2.png" alt="">
+                            <div class="letter__images">
+                                <img :src="letter.image_path" alt="">
+                            </div>
+                        </div>
+
+                        <img class="letter__item letter__item_3" src="assets/images/letter/3.png" alt="">
+                        <img class="letter__item letter__item_4" src="assets/images/letter/4.png" alt="">
+                    </div>
+                    <div class="letter__tittle" @click="pageLetter(letter)">{{letter.title}}</div>
+                </div>
+            </div>
+
+            <!-- LETTER INFO -->
+            <transition>
+                <div v-if="letter_flag" class="letter__info__container">
+                    <div class="letter__info">
+                        <div class="letter__info__img"
+                             :style="{background: 'url(' + letter.image_path + ') center center / cover no-repeat'}"></div>
+                        <div class="letter__info__text">
+                            <h1 class="form__title">{{letter.title}}</h1>
+                            <h2>My purpose is...</h2>
+                            <div class="letter__text">
+                                {{letter.content}}
+                            </div>
+                            <div class="letter__user">
+                                {{letter.name}}
+                            </div>
+                        </div>
+                        <img @click="letter_flag = !letter_flag" class="letter__cross" src="assets/images/cross_1.png"
+                             alt="">
+                    </div>
+                </div>
+            </transition>
+
+
+            <!-- /LETTER INFO -->
+            <transition>
+                <div v-if="notification" class="notification">
+                    <div class="notification__inner">
+                        <div class="notification__text">
+                            Letter Created
+                        </div>
+                        <img @click="notification = !notification" class="notification__cross"
+                             src="assets/images/cross_2.png" alt="">
+
+                    </div>
+
+                </div>
+
+            </transition>
+        </div>
+    </transition>
+    <!-- /VIEW -->
+
+</div>
+
+<!-- SCRIPTS -->
+<script src="assets/js/jquery-3.5.0.min.js"></script>
+<script src="assets/js/vue.min.js"></script>
+<script src="assets/js/jquery.parallax.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
